@@ -1,0 +1,23 @@
+<form [formGroup]="pairedNumberForm">
+    <div class="control-row">
+
+        <div class="control">
+            <label for="x">Value X</label>
+            <input id="x" type="number" placeholder="X value" formControlName="xInput" [max]="maxX() -1" (blur)="onBlur()" />
+        </div>
+
+        <div class="control">
+            <label for="y">Value Y</label>
+            <input id="y" type="number" placeholder="Y value" formControlName="yInput" [max]="maxY() -1" (blur)="onBlur()" />
+        </div>
+    </div>
+
+    @if (xInputIsInvalid) {
+    <p class="error">Invalid X entered - Must be a number less then {{ maxX() -1 }}.</p>
+    }
+
+    @if (yInputIsInvalid) {
+    <p class="error">Invalid Y entered - Must be a number less then {{ maxY() -1 }}.</p>
+    }
+
+</form>
