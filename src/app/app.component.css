@@ -60,6 +60,7 @@ form {
 
 button:disabled {
     background-color: gray;
+    pointer-events: none;
 }
 
 .button:hover,

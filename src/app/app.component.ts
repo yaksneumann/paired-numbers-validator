@@ -9,7 +9,7 @@ import { ErrorModalComponent } from './shared/modal/error-modal/error-modal.comp
   standalone: true,
   imports: [ReactiveFormsModule, PairNumbersComponent, ErrorModalComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   @ViewChild('pairsNumRef') pairsNumComponent!: PairNumbersComponent;
@@ -23,17 +23,20 @@ export class AppComponent {
 
   protected fg = new FormGroup({
     description: new FormControl('', {
-      validators: [Validators.required],
+      validators: [Validators.required]
     }),
     pairsNum: new FormControl(
       {
         xInput: '',
         yInput: '',
-      }),
+      },
+      {validators: [Validators.required]
+
+      })
   });
 
-  protected isPairNumValid(isValid: boolean): void {
-    this.pairNumValid.set(isValid);
+  protected isPairNumValid(valid: boolean): void {
+    this.pairNumValid.set(valid);
   }
 
   protected saveData() {
@@ -48,9 +51,8 @@ export class AppComponent {
         this.title.set('Yay!');
         this.errorService.showError('Data saved successfully!');
         this.fg.reset();
-        const pairsNumComponent = this.pairsNumComponent; // get reference to child component
-        if (pairsNumComponent) {
-          pairsNumComponent.resetForm();
+        if (this.pairsNumComponent) {
+          this.pairsNumComponent.resetForm();
         }
       } else {
         this.title.set('Oh No! Pair not saved');
